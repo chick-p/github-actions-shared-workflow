@@ -1,0 +1,10 @@
+name: Run release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  call:
+    uses: chick-p/github-actions-shared-workflow/.github/workflows/create-release-note.yml@main

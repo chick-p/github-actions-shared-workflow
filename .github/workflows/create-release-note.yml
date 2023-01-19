@@ -1,0 +1,15 @@
+name: Create Release note
+
+on:
+  workflow_call:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          version=$(echo "${GITHUB_REF_NAME}" | sed -E "s/(v[0-9.]+)/\1/")
+          gh release create "$version" --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
