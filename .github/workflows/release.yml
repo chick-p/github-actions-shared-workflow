@@ -1,0 +1,40 @@
+name: Tagging and Release
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: "Version"
+        required: true
+        type: string
+
+jobs:
+  tagging:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          git tag ${{ inputs.version }}
+          git push --tags origin ${{ inputs.version }}
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: tagging
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          gh release create ${{ inputs.version }} --generate-notes
+
+  change-major-version-head:
+    runs-on: ubuntu-latest
+    needs: tagging
+    steps:
+      - uses: actions/checkout@v3
+      - name: Change HEAD on the minor version branch
+        run: |
+          version=$(echo ${{ inputs.version }} | sed -E "s/(v[0-9]+)\..+/\1/")
+          git push --force origin "HEAD:refs/heads/${version}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
