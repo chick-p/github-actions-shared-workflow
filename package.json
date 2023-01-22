@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/chick-p/github-actions-shared-workflow/issues"
   },
-  "homepage": "https://github.com/chick-p/github-actions-shared-workflow#readme"
+  "homepage": "https://github.com/chick-p/github-actions-shared-workflow#readme",
+  "devDependencies": {
+    "prettier": "^2.8.3"
+  }
 }
