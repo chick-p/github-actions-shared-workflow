@@ -1,0 +1,17 @@
+name: Keep major version
+
+on:
+  workflow_call:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Change HEAD on the minor version branch
+        run: |
+          version=$(echo "${GITHUB_REF_NAME}" | sed -E "s/(v[0-9]+)\..+/\1/")
+          git push --force origin "HEAD:refs/heads/${version}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
