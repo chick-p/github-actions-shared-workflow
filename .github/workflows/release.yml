@@ -12,7 +12,7 @@ jobs:
   tagging:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           git tag ${{ inputs.version }}
           git push --tags origin ${{ inputs.version }}
@@ -23,7 +23,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           gh release create ${{ inputs.version }} --generate-notes
 
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: tagging
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Change HEAD on the minor version branch
         run: |
           version=$(echo ${{ inputs.version }} | sed -E "s/(v[0-9]+)\..+/\1/")
