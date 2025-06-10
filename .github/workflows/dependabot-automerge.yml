@@ -27,4 +27,5 @@ jobs:
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           PR_TITLE: ${{ github.event.pull_request.title }}
+          GH_REPO: ${{ github.event.repository.full_name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
