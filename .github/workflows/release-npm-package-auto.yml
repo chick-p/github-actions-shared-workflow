@@ -38,6 +38,7 @@ jobs:
         env:
           PACKAGE_VERSION: ${{ needs.get-package-version.outputs.version }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
 
   tagging:
     runs-on: ubuntu-latest
