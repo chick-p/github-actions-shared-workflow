@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/chick-p/github-actions-shared-workflow#readme",
   "devDependencies": {
-    "prettier": "^2.8.3"
+    "prettier": "^3.6.2"
   }
 }
