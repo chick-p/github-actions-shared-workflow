@@ -15,7 +15,7 @@ jobs:
     outputs:
       version: ${{ steps.get-version.outputs.PACKAGE_VERSION }}
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - id: get-version
         run: |
           echo "PACKAGE_VERSION=$(jq -r '.version' $PACKAGE_JSON_PATH)" >> "$GITHUB_OUTPUT"
@@ -45,7 +45,7 @@ jobs:
     needs: [get-package-version, check-release-exists]
     if: ${{ needs.check-release-exists.outputs.released == 'false' }}
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - run: |
           git tag "v$PACKAGE_VERSION"
           git push --tags origin "v$PACKAGE_VERSION"
@@ -57,7 +57,7 @@ jobs:
     needs: [get-package-version, check-release-exists, tagging]
     if: ${{ needs.check-release-exists.outputs.released == 'false' }}
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - run: |
           gh release create "v$PACKAGE_VERSION" --generate-notes
         env:
