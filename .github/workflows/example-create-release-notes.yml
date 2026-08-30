@@ -7,4 +7,4 @@ on:
 
 jobs:
   call:
-    uses: chick-p/github-actions-shared-workflow/.github/workflows/create-release-note.yml@main
+    uses: chick-p/github-actions-shared-workflow/.github/workflows/create-release-note.yml@19278e10d4e7f1860a5ff184e9ddc622bba230f3 # v0.4.0
